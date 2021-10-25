@@ -97,7 +97,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+<<<<<<< HEAD
+theme: landscape
+=======
+theme: jekyll-theme-cayman
+>>>>>>> 2b0ef80049e32e38be5cd70540675fc487689a7e
 search:
   path: search.xml
   field: post
@@ -108,5 +112,5 @@ search:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/Nickzxw/Nickzxw.github.io.git
+  repo: git@github.com:Nickzxw/Nickzxw.github.io.git
   branch: master
