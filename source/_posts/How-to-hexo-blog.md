@@ -1,5 +1,5 @@
 ---
-title: Hexo: How to hexo blog and submit it to github.
+title: Hexo- How to hexo blog and submit it to github.
 date: 2021-10-25 20:51:15
 categories:
 - Hexo
