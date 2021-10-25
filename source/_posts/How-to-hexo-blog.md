@@ -1,5 +1,5 @@
 ---
-title: Hexo- How to hexo blog and submit it to github.
+title: Hexo - How to hexo blog and submit it to github.
 date: 2021-10-25 20:51:15
 categories:
 - Hexo
@@ -8,7 +8,9 @@ tags:
 - Hexo
 - Git
 ---
+An article about how to use hexo to write a blog !
 
+<!-- more -->
 # Make a new document
 
 If our file's name is "hello hexo", you can type the following command in **Git GUI** to create  a new file.
@@ -118,9 +120,11 @@ We can reference pictures and other resources by using the tag plugin provided b
 
 
 ```markdown
+---
 {% asset_path slug %}
 {% asset_img slug [title] %}
 {% asset_link slug [title] %}
+---
 ```
 
 
@@ -130,7 +134,9 @@ The correct way to cite pictures:
 
 
 ```markdown
+---
 {% asset_img example.jpg This is an example image %}
+---
 ```
 
 
