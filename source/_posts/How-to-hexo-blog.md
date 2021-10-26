@@ -10,7 +10,16 @@ tags:
 ---
 An article about how to use hexo to write a blog !
 
+<<<<<<< HEAD
 <!-- more -->
+=======
+An article about how to write blog by using Hexo.
+
+<!-- more -->
+
+
+
+>>>>>>> 0e4801b (10-26)
 # Make a new document
 
 If our file's name is "hello hexo", you can type the following command in **Git GUI** to create  a new file.
@@ -121,9 +130,15 @@ We can reference pictures and other resources by using the tag plugin provided b
 
 ```markdown
 ---
+<<<<<<< HEAD
 {% asset_path slug %}
 {% asset_img slug [title] %}
 {% asset_link slug [title] %}
+=======
+{/% asset_path slug /%}
+{/% asset_img slug [title] /%}
+{/% asset_link slug [title] /%}
+>>>>>>> 0e4801b (10-26)
 ---
 ```
 
@@ -135,7 +150,11 @@ The correct way to cite pictures:
 
 ```markdown
 ---
+<<<<<<< HEAD
 {% asset_img example.jpg This is an example image %}
+=======
+{/% asset_img example.jpg This is an example image /%}
+>>>>>>> 0e4801b (10-26)
 ---
 ```
 
