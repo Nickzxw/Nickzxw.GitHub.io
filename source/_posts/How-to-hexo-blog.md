@@ -12,6 +12,8 @@ An article about how to use hexo to write a blog !
 
 <!-- more -->
 
+
+
 # Make a new document
 
 If our file's name is "hello hexo", you can type the following command in **Git GUI** to create  a new file.
