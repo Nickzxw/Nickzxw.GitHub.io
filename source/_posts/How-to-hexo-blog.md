@@ -135,9 +135,9 @@ We can reference pictures and other resources by using the tag plugin provided b
 {% asset_img slug [title] %}
 {% asset_link slug [title] %}
 =======
-{/% asset_path slug /%}
-{/% asset_img slug [title] /%}
-{/% asset_link slug [title] /%}
+{% asset_path slug %}
+{% asset_img slug [ title ] %}
+{% asset_link slug [ title ] %}
 >>>>>>> 0e4801b (10-26)
 ---
 ```
@@ -153,7 +153,7 @@ The correct way to cite pictures:
 <<<<<<< HEAD
 {% asset_img example.jpg This is an example image %}
 =======
-{/% asset_img example.jpg This is an example image /%}
+{% asset_img example.jpg This is an example image %}
 >>>>>>> 0e4801b (10-26)
 ---
 ```
