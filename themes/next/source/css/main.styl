@@ -45,3 +45,126 @@ for $inject_mixin in hexo-config('injects.mixin')
 // --------------------------------------------------
 for $inject_style in hexo-config('injects.style')
   @import $inject_style;
+  
+body {
+  background: url(/images/background.jpg);  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  color: var(--text-color);
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1em;
+  line-height: 2;
+}
+// 侧边标题栏
+.header-inner {
+  opacity: 0.85;
+}
+
+// 侧边头像栏
+.sidebar{
+  transition-duration: 0.4s;  
+  opacity: 0.85;  // 透明度
+}
+
+
+
+// 侧边标题栏
+.header-inner {
+  border-radius: 20px 20px 20px 20px; //边框圆角
+  opacity: 0.85;
+}
+
+// 侧边头像栏
+.sidebar{
+  transition-duration: 0.4s;  
+  opacity: 0.85;  // 透明度
+  border-radius: 10px 10px 10px 10px; //边框圆角
+}
+
+// 侧边头像框内部
+.sidebar-inner {
+  background: var(--content-bg-color);
+  border-radius: 10px 10px 10px 10px; //边框圆角
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-sizing: border-box;
+  color: var(--text-color);
+  width: 240px;
+  opacity: 0;
+}
+
+.content-wrap {
+  padding-top: 15px;
+  opacity: 0.8;
+}
+
+// 顶部进度条的隐藏代码
+.headband {
+  height: 0px;
+  background: #fc6423;
+}
+// 当光标放入阅读全文上时,应用下面的配色方案
+.post-button .btn:hover{
+  border-color: #6f42c1;
+  color: #fff;
+  background: #e431d3;
+  background-image: linear-gradient(90deg,#a166ab 0,#ef4e7b 25%,#f37055 50%,#ef4e7b 75%,#a166ab 100%);
+}
+// 光标放到文章列表上面的时候,会变成彩色
+.posts-expand .post-title-link::before {
+    background-image: linear-gradient(90deg,#a166ab 0,#ef4e7b 25%,#f37055 50%,#ef4e7b 75%,#a166ab 100%);
+}
+// 针对阅读全文按钮的美化
+.post-button .btn {
+    color: #555!important;
+    background-color: #fff;
+    border-radius: 7px;
+    font-size: 16px;
+    box-shadow: inset 0 0 10px 0 #e346035c;
+    border: none!important;
+    transition-property: unset;
+    padding: 0 15px;
+    border-radius: 30px 30px 30px 30px;
+}
+// 对页面文章的标题的美化
+.posts-expand .post-title-link {
+    color: #d9534f;
+}
+.posts-expand .post-title {
+    color: #d9534f;
+}
+// 修改全局字体大小
+
+.post-title-link {
+    font-size: 35px;
+}
+
+.post-body {
+    font-size: 1.2em;
+}
+
+// 美化 h2 h3 标签
+.post-body h1 {
+	color: #d9534f;
+}
+.post-body h2 {
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 9px 2px rgba(10,10,0,0.5);
+    font-weight: bold;
+    background-color: #EEE5F8;
+    border-radius: 5px;
+    color: #FFF;
+    padding-left: 15px;
+    text-shadow: 1px 1px 1px #000;
+}
+.post-body h3 {
+    background: #EAD0D1;
+    border-radius: 30px 6px 37px 6px;
+    box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 2px rgba(10,10,0,0.5);
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 12px 0 !important;
+    padding: 5px 0 5px 10px;
+    text-shadow: 2px 2px 3px #222;
+}
