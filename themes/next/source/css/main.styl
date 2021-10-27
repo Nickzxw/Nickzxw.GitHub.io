@@ -56,31 +56,27 @@ body {
   font-size: 1em;
   line-height: 2;
 }
-// 侧边标题栏
-.header-inner {
+
+// page-opacity
+
+.content-wrap {
   opacity: 0.85;
 }
 
-// 侧边头像栏
-.sidebar{
-  transition-duration: 0.4s;  
-  opacity: 0.85;  // 透明度
-}
-
-
-
-// 侧边标题栏
-.header-inner {
-  border-radius: 20px 20px 20px 20px; //边框圆角
+.sidebar {
   opacity: 0.85;
-}
-
-// 侧边头像栏
-.sidebar{
-  transition-duration: 0.4s;  
-  opacity: 0.85;  // 透明度
   border-radius: 10px 10px 10px 10px; //边框圆角
 }
+
+.header-inner {
+  border-radius: 20px 20px 20px 20px; //边框圆角
+  background: rgba(255,255,255,0.85);
+}
+
+.popup {
+  opacity: 0.9;
+}
+
 
 // 侧边头像框内部
 .sidebar-inner {
@@ -93,16 +89,7 @@ body {
   opacity: 0;
 }
 
-.content-wrap {
-  padding-top: 15px;
-  opacity: 0.8;
-}
 
-// 顶部进度条的隐藏代码
-.headband {
-  height: 0px;
-  background: #fc6423;
-}
 // 当光标放入阅读全文上时,应用下面的配色方案
 .post-button .btn:hover{
   border-color: #6f42c1;
@@ -110,6 +97,9 @@ body {
   background: #e431d3;
   background-image: linear-gradient(90deg,#a166ab 0,#ef4e7b 25%,#f37055 50%,#ef4e7b 75%,#a166ab 100%);
 }
+
+
+
 // 光标放到文章列表上面的时候,会变成彩色
 .posts-expand .post-title-link::before {
     background-image: linear-gradient(90deg,#a166ab 0,#ef4e7b 25%,#f37055 50%,#ef4e7b 75%,#a166ab 100%);
@@ -167,4 +157,11 @@ body {
     margin: 12px 0 !important;
     padding: 5px 0 5px 10px;
     text-shadow: 2px 2px 3px #222;
+}
+.post-eof {
+    background: #ccc;
+    height: 4px;
+    margin: 80px auto 60px;
+    text-align: center;
+    width: 88%;
 }
