@@ -9,7 +9,7 @@ tags:
 - Deep Learning
 ---
 
-This series of blogs is to share what i learned in the book Neural Networks and Deep Learning.
+This series of blogs is to share what I learned in the book Neural Networks and Deep Learning.
 
 
 
