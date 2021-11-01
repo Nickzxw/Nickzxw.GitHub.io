@@ -1,6 +1,7 @@
 ---
 title: A global analysis of the impact of COVID-19
 date: 2021-10-31 13:30:21
+categories:
 - Paper
 - Law of time and space
 tags: 
@@ -9,9 +10,11 @@ tags:
 - Crime
 ---
 
-**A global analysis of the impact of COVID-19 stay-at-home restrictions on crime**
+**A global analysis of the impact of COVID-19 stay-at-home restrictions on crime** 
 
-**From Natural Human Behaviour**
+
+
+***From Natural Human Behaviour***
 
 *Amy E. Nivette  1,2 ✉, Renee Zahnow  3, Raul Aguilar  4, Andri Ahven5, Shai Amram6, Barak Ariel  6,7,*  
 *María José Arosemena Burbano7, Roberta Astolfi8, Dirk Baier9, Hyung-Min Bark  10, Joris E. H. Beijers2,*  
@@ -26,7 +29,7 @@ Rubén Poblete-Cazenave  23, Simon Rose7,16, Robert Svensson  18, Nico T rajtenb
 
 **Objective** The stay-at-home restrictions to control the spread COVID-19 led to unparalleled(前所未有的) sudden change in daily life but it is unclear how they affected <u>*urban crime globally*</u>.
 
-**Methods** We collected data on daily counts of crime in 27 cities across 23 counties in the Americas, Europe, the Middle East and Asia. We conducted <u>interrupted time series analyses</u>(间断时间序列分析) to assess the impact of stay-at-home restrictions on different types of crime(***Assault, Burglary, Robbery, Theft, Vehicle theft, Homicide***) in each city.
+**Methods** We collected data on daily counts of crime in 27 cities across 23 counties in the Americas, Europe, the Middle East and Asia. We conducted <u>interrupted time series analyses</u>(间断时间序列分析) to assess the impact of stay-at-home restrictions on different types of crime **(Assault, Burglary, Robbery, Theft, Vehicle theft, Homicide)**  in each city.
 
 **Results** Our findings show that the stay-at-home policies were associated with a considerable drop in urban crime, but with substantial variation across cities and types of crime. Meta-regression results shower that more stringent restrictions over movement in public space were predictive of larger declines in crime.
 
@@ -65,9 +68,9 @@ Various theories of crime examine how sudden and persisting restraints on popula
 
 ​	Daily crime data were collected from 27 cities representing 23 countries around the world. We sought daily crime data on assault, burglary, robbery, theft, vehicle theft and homicide for the current analyses.
 
-​	The ‘date’ of the time series refers to the date the offence presumably occurred, as recorded by the police. In cases where this information was not available (that is, Amsterdam and São Paulo), the date of reporting was used.
+​	The 'date' of the time series refers to the date the offence presumably occurred, as recorded by the police. In cases where this information was not available (that is, Amsterdam and São Paulo), the date of reporting was used.
 
-## 	*The ‘treatment’ variable*
+## 	*The 'treatment' variable*
 
 ​	The treatment effect of a city’s stay-at-home restrictions on crime incidents is measured using a dummy 
 variable(虚拟变量), whereby 1 represents the period in which restrictions were in place and 0 represents the period prior to (or following) the implementation of restrictions.
@@ -94,7 +97,7 @@ variable(虚拟变量), whereby 1 represents the period in which restrictions we
 
 ​	Finally, we examined whether variation in the stringency of the lockdown was predictive of the amount of change in crime. Results show  that  more  stringent  limitations  regarding  requirements/recommendations to stay at home were associated with stronger declines in crime levels.The additional analyses suggest that it is mostly the stay-at-home requirements that were associated with larger declines, in that other containment policies were generally not significantly associated with declines, and the use of the overall stringency index generally did not substantially improve the models (Supplementary Table 21). We found few systematic differences in the ‘elasticity’ of different crime categories, that is, in the extent to which variation in the stringency of COVID-19-related restrictions was associated with change in crime levels. This suggests, surprisingly perhaps, that all crime categories included in this analysis responded  similarly  to  variation  in  the  extent  of  constraints  on  daily movement.
 
-![Lena](/_posts/A-global-analysis-of-the-impact-of-COVID-19/Scatterplot.jpg)
+![Lena](Scatterplot.jpg)
 
 
 
