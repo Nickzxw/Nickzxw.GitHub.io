@@ -1,5 +1,5 @@
 ---
-title: A global analysis of the impact of COVID-19
+title: A Global Analysis of the Impact of COVID-19
 date: 2021-10-31 13:30:21
 categories:
 - Paper
@@ -10,7 +10,7 @@ tags:
 - Crime
 ---
 
-**A global analysis of the impact of COVID-19 stay-at-home restrictions on crime** 
+**A Global Analysis of the Impact of COVID-19 Stay-At-Home Restrictions on Crime** 
 
 
 
