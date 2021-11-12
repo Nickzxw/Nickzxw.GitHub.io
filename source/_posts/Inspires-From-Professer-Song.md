@@ -1,5 +1,5 @@
 ---
-title: Inspires From Professor Song
+title: Inspired From Professor Song
 date: 2021-11-12 22:42:06
 tags:
 - Thoughts
