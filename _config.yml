@@ -111,7 +111,9 @@ search:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:Nickzxw/Nickzxw.github.io.git
+  #https://gitee.com/nickzxw/nickzxw.git  Gitee
+  #git@github.com:Nickzxw/Nickzxw.github.io.git  Github
+  repo: https://gitee.com/nickzxw/nickzxw.git
   branch: master
   
 live2d:
