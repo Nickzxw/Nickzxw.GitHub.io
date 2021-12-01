@@ -113,7 +113,7 @@ deploy:
   type: git
   #https://gitee.com/nickzxw/nickzxw.git  Gitee
   #git@github.com:Nickzxw/Nickzxw.github.io.git  Github
-  repo: https://gitee.com/nickzxw/nickzxw.git
+  repo: git@github.com:Nickzxw/Nickzxw.github.io.git
   branch: master
   
 live2d:

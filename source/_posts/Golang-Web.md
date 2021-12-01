@@ -40,7 +40,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 - 模板：统一简化的HTML机制
 - ...
 
-基于Python著名的Web框架bottle，通过这个为框架提供的特性，有助于理解框架的核心能力。
+基于Python著名的Web框架bottle，通过这个框架提供的特性，有助于理解框架的核心能力。
 
 - 路由（Routing）：将请求映射到函数，支持动态路由。
 - 模板（Templates）：使用内置模板引擎提供模板渲染机制。
@@ -294,3 +294,272 @@ gee.go的实现：
 - `Engine`实现的 *ServeHTTP* 方法的作用就是，解析请求的路径，查找路由映射表，如果查到就执行注册的处理方法；如果查不到，就返回 *404 NOT FOUND* 。
 
 至此，整个`Gee`框架的原型已经出来了。实现了路由映射表，提供了用户注册静态路由的方法，包装了启动服务的函数。当然，到目前为止，我们还没有实现比`net/http`标准库更强大的能力，后面可以将动态路由、中间件等功能添加上去了。
+
+### Web框架Gee—第二天：上下文
+
+任务实现：
+
+- 将`路由(router)`独立出来，方便之后进行功能扩充。
+- 设计`上下文（Context）`，封装Request和Response，提供对JSON、HTML等返回类型的支持。
+- 框架代码新增约90行
+
+#### 设计Context
+
+**必要性**
+
+1. Web服务，主要是根据请求`*http.Request`，构造响应`http.ResponseWriter`。但由于这两个对象提供的接口粒度太小，要想构造完整的响应，需要考虑信息头（Header）和消息体（Body），而Header又包含了状态码（StatusCode）和消息类型（ContentType）等几乎每次请求都需要设置的信息。
+2. 针对使用场景，封装`*http.Request`和`http.ResponseWriter`的方法，简化相关接口的调用，只是设计Context的原因之一，框架需要支撑额外的功能。例如，将来解析动态路由`/webPage:name`，参数`:name`需要放在哪里，再比如框架需要支持中间件，中间件产生的信息存储在何处？Context随着每一个请求的出现而产生，请求的结束而销毁，当前请求强相关的信息都有Context承载。
+
+**具体实现**
+
+**day2-context/gee/context.go**
+
+```go
+package gee
+
+import (
+   "encoding/json"
+   "fmt"
+   "net/http"
+)
+
+type H map[string]interface{}
+
+type Context struct {
+   // origin objects
+   Writer http.ResponseWriter
+   Req    *http.Request
+   // request info
+   Path   string
+   Method string
+   // response info
+   StatusCode int
+}
+
+func newContext(w http.ResponseWriter, req *http.Request) *Context {
+   return &Context{
+      Writer: w,
+      Req:    req,
+      Path:   req.URL.Path,
+      Method: req.Method,
+   }
+}
+
+func (c *Context) PostForm(key string) string {
+   return c.Req.FormValue(key)
+}
+
+func (c *Context) Query(key string) string {
+   return c.Req.URL.Query().Get(key)
+}
+
+func (c *Context) Status(code int) {
+   c.StatusCode = code
+   c.Writer.WriteHeader(code)
+}
+
+func (c *Context) SetHeader(key string, value string) {
+   c.Writer.Header().Set(key, value)
+}
+
+func (c *Context) String(code int, format string, values ...interface{}) {
+   c.SetHeader("Content-Type", "text/plain")
+   c.Status(code)
+   c.Writer.Write([]byte(fmt.Sprintf(format, values...)))
+}
+
+func (c *Context) JSON(code int, obj interface{}) {
+   c.SetHeader("Content-Type", "application/json")
+   c.Status(code)
+   encoder := json.NewEncoder(c.Writer)
+   if err := encoder.Encode(obj); err != nil {
+      http.Error(c.Writer, err.Error(), 500)
+   }
+}
+
+func (c *Context) Data(code int, data []byte) {
+   c.Status(code)
+   c.Writer.Write(data)
+}
+
+func (c *Context) HTML(code int, html string) {
+   c.SetHeader("Content-Type", "text/html")
+   c.Status(code)
+   c.Writer.Write([]byte(html))
+}
+```
+
+- 代码开头给`map[string]interface{}`起了别名`gee.h`，构建JSON数据时，会更简洁。
+
+**JSON数据封装前：**
+
+```go
+obj = map[string]interface{}{
+    "name": "geektutu",
+    "password": "1234",
+}
+w.Header().Set("Content-Type", "application/json")
+w.WriteHeader(http.StatusOK)
+encoder := json.NewEncoder(w)
+if err := encoder.Encode(obj); err != nil {
+    http.Error(w, err.Error(), 500)
+}
+```
+
+**封装后：**
+
+```go
+c.JSON(http.StatusOK, gee.H{
+   "username": c.PostForm("username"),
+   "password": c.PostForm("password"),
+})
+```
+
+- `Context`目前只包含了`http.ResponseWriter`和`*http.Request`，另外提供对Method和Path这两个常用属性的直接访问。
+- 提供了访问Query和PostForm参数的方法。
+- 提供了快速构造String/Data/JSON/HTML响应的方法。
+
+#### 路由(Router)
+
+将路由相关方法和结构提取出来，存储在新文件`router.go`，方便后续进行功能扩充，例如提供动态路由的支持。router的handle方法做了细微的调整，handle的参数变成了Context。
+
+**day2-context/gee/router.go**
+
+```go
+package gee
+
+import (
+   "log"
+   "net/http"
+)
+
+type router struct {
+   handlers map[string]HandlerFunc
+}
+
+func newRouter() *router {
+   return &router{handlers: make(map[string]HandlerFunc)}
+}
+
+func (r *router) addRoute(method string, pattern string, handler HandlerFunc) {
+   log.Printf("Route %4s - %s", method, pattern)
+   key := method + "-" + pattern
+   r.handlers[key] = handler
+}
+
+func (r *router) handle(c *Context) {
+   key := c.Method + "-" + c.Path
+   if handler, ok := r.handlers[key]; ok {
+      handler(c)
+   } else {
+      c.String(http.StatusNotFound, "404 NOT FOUND: %s\n", c.Path)
+   }
+}
+```
+
+#### 框架入口
+
+**day2-context/gee/gee.go**
+
+```go
+package gee
+
+import (
+   "net/http"
+)
+
+// HandlerFunc defines the request handler used by gee
+type HandlerFunc func(*Context)
+
+// Engine implement the interface of ServeHTTP
+type Engine struct {
+   router *router
+}
+
+// New is the constructor of gee.Engine
+func New() *Engine {
+   return &Engine{router: newRouter()}
+}
+
+func (engine *Engine) addRoute(method string, pattern string, handler HandlerFunc) {
+   engine.router.addRoute(method, pattern, handler)
+}
+
+// GET defines the method to add GET request
+func (engine *Engine) GET(pattern string, handler HandlerFunc) {
+   engine.addRoute("GET", pattern, handler)
+}
+
+// POST defines the method to add POST request
+func (engine *Engine) POST(pattern string, handler HandlerFunc) {
+   engine.addRoute("POST", pattern, handler)
+}
+
+// Run defines the method to start a http server
+func (engine *Engine) Run(addr string) (err error) {
+   return http.ListenAndServe(addr, engine)
+}
+
+func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+   c := newContext(w, req)
+   engine.router.handle(c)
+}
+```
+
+将`router`相关代码独立后，`gee.go`简单了，并且通过实现ServerHTTP接口，接管了所有HTTP请求。调用router.handle之前构造了Context对象。
+
+**day2-context/main.go**
+
+```go
+package main
+
+import (
+   "gee"
+   "net/http"
+)
+
+func main() {
+   r := gee.New()
+   r.GET("/", func(c *gee.Context) {
+      c.HTML(http.StatusOK, "<h1>Hello Gee</h1>")
+   })
+
+   r.GET("/hello", func(c *gee.Context) {
+      c.String(http.StatusOK, "hello %s, you're at %s\n", c.Query("name"), c.Path)
+   })
+
+   r.POST("/login", func(c *gee.Context) {
+      c.JSON(http.StatusOK, gee.H{
+         "username": c.PostForm("username"),
+         "password": c.PostForm("password"),
+      })
+   })
+
+   r.Run(":9999")
+}
+```
+
+借助curl，展示下今天的成果！
+
+```shell
+$ curl -i http://localhost:9999/
+HTTP/1.1 200 OK
+Date: Date: Wed, 24 Nov 2021 09:33:46 GMT
+Content-Length: 18
+Content-Type: text/html; charset=utf-8
+<h1>Hello Nick</h1>
+
+$ curl "http://localhost:9999/hello?name=X.Zhang"
+hello X.Zhang, you're at /hello
+
+$ curl -X POST "http://localhost:9999/login" -d "username=geektutu&password=1234"
+{"password":"6666","username":"zhangxuewei"}
+
+$ curl "http://localhost:9999/xxx"
+404 NOT FOUND: /xxx
+```
+
+PS: 在Goland内使用控制台运行会出错显示找不到X匹配的参数
+
+解决方案: 使用Windows自带cmd运行即可
+
