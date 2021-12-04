@@ -58,19 +58,15 @@ tags:
 
 但是时间复杂度为$$ O(N^2) $$
 
-
-
-```go
-func twoSum(nums []int, target int) []int {
-    for i, x := range nums {
-        for j := i + 1; j < len(nums); j++ {
-            if x+nums[j] == target {
-                return []int{i, j}
-            }
-        }
-    }
-    return nil
-}
+```python
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+        
+        return []
 ```
 
 **方法二：利用map**
@@ -79,19 +75,14 @@ func twoSum(nums []int, target int) []int {
 
 扫描数组，对于每一个元素，在`map`中寻找能够相加得到给定值的另一半数字，找到了则返回两个数字的下标，没找到就把这个数字存入`map`，等扫描到“另一半”数字时再取出下标。
 
-```go
-// TwoSum函数返回数组中相加等于目标值的值的下标——map方法
-func twoSum(nums []int, target int) []int {
-	// map[键类型]int{}-值类型
-	hashTable := make(map[int]int)
-	for i := 0; i < len(nums); i++{
-		anotherSum := target - nums[i]
-		if _, ok := hashTable[anotherSum]; ok{
-			return []int{hashTable[anotherSum], i}
-		}
-		hashTable[nums[i]] = i
-	}
-	return nil
-}
+```python
+// twoSum函数返回数组中相加等于目标值的值的下标——map方法
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashTable = dict()
+        for i, num in enumerate(nums):
+            if target-num in hashTable:
+                return [hashTable[target-num], i]
+            hashTable[num] = i
+        return []
 ```
 
