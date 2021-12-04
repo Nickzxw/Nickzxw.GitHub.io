@@ -1,10 +1,10 @@
 ---
-title: Leetcode For Golang
+title: Leetcode For Python
 date: 2021-12-01 20:42:43
 categories:
-- Go
+- Python
 tags:
-- Go
+- Python
 ---
 
  在此记录Leetcode刷题之路！
