@@ -1,5 +1,5 @@
 ---
-title: Leetcode-两数之和
+title: LeetCode(Python实现)-两数之和
 date: 2021-12-01 20:42:43
 categories:
 - Python
@@ -15,7 +15,7 @@ tags:
 
 <!--more-->
 
-### 1.两数之和
+### 两数之和
 
 #### 题目描述
 
