@@ -127,7 +127,7 @@ live2d:
     use: live2d-widget-model-nipsilon  #选择哪种模型
   display: #放置位置和大小
     position: right
-    width: 300
-    height: 300
+    width: 250
+    height: 250
   mobile:
     show: false #是否在手机端显示

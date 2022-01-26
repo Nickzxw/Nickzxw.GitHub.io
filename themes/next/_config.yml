@@ -411,8 +411,7 @@ font:
   enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host:
-
+  host: https://fonts.googleapis.com
   # Font options:
   # `external: true` will load this font family from `host` above.
   # `family: Times New Roman`. Without any quotes.
@@ -421,19 +420,19 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Lato
+    family: Noto Serif SC
     size: 1.2
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family:
+    family: ZCOOL XiaoWei
     size: 1.5
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family: Roboto
+    family: ZCOOL XiaoWei
     size: 2.0
 
   # Font settings for posts (.post-body).
@@ -691,9 +690,9 @@ cnzz_siteid:
 # AppID and AppKey are recommended to be the same as valine's for counter compatibility.
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
-  enable: false
-  app_id: # <your app id>
-  app_key: # <your app key>
+  enable: true
+  app_id: 'vhrvEsivU2lY94wJD9aNHJMx-gzGzoHsz'
+  app_key: 'Qck4JcNawg7XjQeVDsdoirN5'
   # Required for apps from CN region
   server_url: # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
