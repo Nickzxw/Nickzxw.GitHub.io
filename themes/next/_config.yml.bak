@@ -677,7 +677,7 @@ google_analytics:
   only_pageview: false
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+baidu_analytics: a1693fc5c0727c998ed003c4bf9d4926
 
 # Growingio Analytics
 growingio_analytics: # <project_id>
@@ -691,10 +691,8 @@ cnzz_siteid:
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
   enable: true
-  app_id: # <your app id>
-  app_key: # <your app key>
-  # Required for apps from CN region
-  server_url: # <your server url>
+  app_id: vhrvEsivU2lY94wJD9aNHJMx-gzGzoHsz
+  app_key: Qck4JcNawg7XjQeVDsdoirN5
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.

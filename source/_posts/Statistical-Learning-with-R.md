@@ -1,5 +1,5 @@
 ---
-title: Statistical Learning with R
+title: 【笔记】Statistical Learning with R
 date: 2021-11-02 08:47:28
 categories:
 - Books
