@@ -1,5 +1,5 @@
 ---
-title: 2022-1-29-什么是 NFT ？音乐股票又是啥？
+title: 什么是 NFT ？音乐股票又是啥？
 date: 2022-01-29 00:09:13
 categories:
 - Note
