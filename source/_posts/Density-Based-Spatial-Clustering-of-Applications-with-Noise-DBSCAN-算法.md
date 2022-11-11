@@ -11,6 +11,8 @@ DBSCAN 的原理、流程、参数设置、优缺点
 
 > Some of us get dipped in flat, some in satin, some in gloss. But every once in a while you find someone who's iridescent, and when you do, nothing will ever compare. —— 《Flipped》
 
+<!--more-->
+
 # DBSCAN
 
 ## DBSCAN 简介
