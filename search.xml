@@ -429,7 +429,9 @@
   <entry>
     <title>GitBug总结</title>
     <url>/2023/06/13/GitBug%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="Git-Bug"><a href="#Git-Bug" class="headerlink" title="Git Bug"></a>Git Bug</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// git 提交报错</span><br><span class="line">fatal: unable to access &#x27;https://github.com/Nickzxw/Nickzxw.github.io.git/&#x27;: Failed to connect to github.com port 443 after 21047 ms: Timed out</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>Git Bug 总结和解决方案</p>
+<span id="more"></span>
+<h1 id="Git-Bug"><a href="#Git-Bug" class="headerlink" title="Git Bug"></a>Git Bug</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// git 提交报错</span><br><span class="line">fatal: unable to access &#x27;https://github.com/Nickzxw/Nickzxw.github.io.git/&#x27;: Failed to connect to github.com port 443 after 21047 ms: Timed out</span><br></pre></td></tr></table></figure>
 <p>问题：远程库和本地库不一致</p>
 <p>解决方案：将远程库 clone 到本地，然后再进行修改，然后再次 push</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Cannot find module &#x27;hexo&#x27; from</span><br></pre></td></tr></table></figure>
