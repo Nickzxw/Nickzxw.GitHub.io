@@ -7,6 +7,10 @@ tags:
 - Note
 ---
 
+Git Bug 总结和解决方案
+
+<!--more-->
+
 # Git Bug
 
 ```
