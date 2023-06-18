@@ -1369,4 +1369,122 @@ P_{ni}=\frac {e^{V_{ni}}∑^J_{j=1}} {e^{V_{nj}}}</script><h3 id="Results-1"><a 
         <tag>Note</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ES6模块化</title>
+    <url>/2023/06/18/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<p>ES6 模块化相关知识</p>
+<span id="more"></span>
+<h1 id="ES6-模块化"><a href="#ES6-模块化" class="headerlink" title="ES6 模块化"></a>ES6 模块化</h1><ul>
+<li><p>AMD 和 CMD 适用于浏览器端的 JS 模块化</p>
+</li>
+<li><p>CommonJS 适用于服务器端的 JS 模块化</p>
+<ul>
+<li>CommonJS （Node.js 的标准）</li>
+</ul>
+</li>
+<li>ES6 模块化规范<ol>
+<li>每个 JS 文件都是一个独立的模块</li>
+<li>导入其他模块成员使用 import 关键字</li>
+<li>向外共享模块成员使用 export 关键字</li>
+</ol>
+</li>
+</ul>
+<h2 id="在-Node-js-中体验-ES5-模块化"><a href="#在-Node-js-中体验-ES5-模块化" class="headerlink" title="在 Node.js 中体验 ES5 模块化"></a>在 Node.js 中体验 ES5 模块化</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 新建包管理文件 package.json</span><br><span class="line">npm init -y </span><br><span class="line">// 在根节点中添加模块化</span><br><span class="line">&quot;type&quot;: &quot;module&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ol>
+<li><p>默认导出和默认导入(注意事项： export default 只能使用一次)</p>
+<ol>
+<li>默认导出 export default 默认导出的成员对象（导出的是一个对象）</li>
+<li>默认导入 import 接收名称 from ‘模块.js’（接受上面导出的对象的名称）</li>
+</ol>
+</li>
+<li><p>按需导出和按需导入</p>
+<ol>
+<li>按需导出 export 成员名称</li>
+<li>按需导入 import {} from </li>
+</ol>
+<p>注意事项：</p>
+<ol>
+<li>模块中可以多次按需导出</li>
+<li>按需导入的成员名称必须和按需导出的名称保持一致</li>
+<li>按需导入时，可以使用as关键字进行重命名</li>
+<li>按需导入可以和默认导入一起使用（import info）</li>
+</ol>
+</li>
+<li><p>直接导入并执行模块中的代码 直接import模块</p>
+</li>
+</ol>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="回调地狱"><a href="#回调地狱" class="headerlink" title="回调地狱"></a>回调地狱</h2><p>多层回调函数相互嵌套，形成了回调地狱。</p>
+<p>tips: 什么是回调函数（在某些事情结束之后执行的函数）</p>
+<p>缺点：代码耦合性太强，难以维护；大量冗余代码互相嵌套，代码的可读性变差。</p>
+<h2 id="Promise-的基本概念"><a href="#Promise-的基本概念" class="headerlink" title="Promise 的基本概念"></a>Promise 的基本概念</h2><ol>
+<li>Promise 是一个构造函数 const p = new Promise()</li>
+<li>new 出来的 Promise 实例对象，代表一个异步操作</li>
+<li>原型对象 Promise.prototype 上包含一个 .then() 方法</li>
+<li>.then 预先指定成功和失败的回调函数<ol>
+<li>p.then(result =&gt; {}, error =&gt; {}) 成功是必选的，失败是可选的</li>
+</ol>
+</li>
+</ol>
+<p>如何按顺序输出？</p>
+<p><strong>.then 方法的特性</strong>：</p>
+<ul>
+<li>如果上一个 .then()方法中返回了一个新的Promise实例对象，则可以通过下一个.then()继续进行处理。</li>
+<li>通过这样的链式调用，可以解决回调地狱的问题</li>
+</ul>
+<p><strong>通过 .catch 捕获错误</strong></p>
+<p><strong>Promise.all()</strong> 会发起并行的 Promise 异步操作了，等所有的异步操作全部结束后才会执行下一步的.then操作</p>
+<p><strong>Promise.race()</strong> 会发起并行的Promise异步操作，只要任何一个异步操作完成，就立即执行下一步的.then操作</p>
+<p><strong>Promise 异步操作的结果，可以用 resolve 或 reject 回调函数进行处理</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(err) <span class="keyword">return</span> reject(err)</span><br><span class="line">resolve(dataStr)</span><br></pre></td></tr></table></figure>
+<h2 id="async-awit"><a href="#async-awit" class="headerlink" title="async / awit"></a>async / awit</h2><p>async / await 是 ES8 引入的新语法，用来简化 Promise 异步操作</p>
+<p>async / await出现之前，开发者只能通过.then()方法链式处理 Promise() 异步操作</p>
+<p>在 async 方法中，第一个 await 之前代码会同步执行，await 之后的代码会异步执行</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve, ms));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">  <span class="keyword">await</span> delay(<span class="number">2000</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">  <span class="keyword">await</span> delay(<span class="number">1000</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;3&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;Start&#x27;</span>);</span><br><span class="line">example();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;End&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Start</span><br><span class="line">1</span><br><span class="line">End</span><br><span class="line">2 (经过2秒后)</span><br><span class="line">3 (再经过1秒后)</span><br></pre></td></tr></table></figure>
+<p>在上述示例中，首先输出 “Start”，然后调用 <code>example()</code> 函数。</p>
+<p>在 <code>example()</code> 函数内部，首先输出 “1”，然后遇到第一个 <code>await</code> 表达式，它等待 2 秒钟的延迟。在等待期间，代码的执行被暂停，事件循环继续执行其他任务。</p>
+<p>接着，经过 2 秒后，第一个 <code>await</code> 表达式解析完成，输出 “2”。然后，遇到第二个 <code>await</code> 表达式，它等待 1 秒钟的延迟。</p>
+<p>最终，经过 1 秒后，第二个 <code>await</code> 表达式解析完成，输出 “3”。然后函数执行完毕。</p>
+<p>总结起来，<code>async/await</code> 允许我们编写异步代码，但以更直观的同步</p>
+<h2 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h2><p>JavaScript 是一门单线程运行的编程语言，也就是说，同一时间只能做一件事情</p>
+<p>缺点：当前一个任务非常耗时的时候。后续任务不得不一直等待，会导致<strong>程序假死</strong>的问题</p>
+<h3 id="同步任务和异步任务"><a href="#同步任务和异步任务" class="headerlink" title="同步任务和异步任务"></a>同步任务和异步任务</h3><p>同步任务</p>
+<ul>
+<li>非耗时任务，在主线程上排队执行的任务</li>
+<li>前一个任务结束才执行后续</li>
+</ul>
+<p>异步任务</p>
+<ul>
+<li>耗时任务，委托给宿主环境（浏览器 or Node.js）</li>
+<li>异步任务执行后，通知主线程执行异步任务回调函数</li>
+</ul>
+<h3 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h3><ol>
+<li><p>宏任务（macrotask）</p>
+<ul>
+<li>异步Ajax请求</li>
+<li>setTimeout、setInterval</li>
+<li>文件操作</li>
+<li>其他宏任务</li>
+</ul>
+</li>
+<li><p>微任务（microtask）</p>
+<ul>
+<li>Promise.then、.catch和.finally</li>
+<li>process.nextTick</li>
+<li>其他微任务</li>
+</ul>
+<p><strong>执行流程：</strong></p>
+<p>宏任务-&gt;执行结束-&gt;有微任务(没有的话直接执行下一个宏任务)-&gt;执行所有微任务-&gt;执行下一个宏任务</p>
+<p><img src="/images/宏任务和微任务.png" alt="img"></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
 </search>
